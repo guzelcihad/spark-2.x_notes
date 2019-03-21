@@ -43,3 +43,12 @@ Process occurs on nodes parallel. Data is stored in memory for each node in clus
 ### Comparisions
 ![RDD-DataSets](3.png)
 ![DataSets-DataFrame](4.png)
+
+# The Architecture of Spark
+* Spark is set up a classic Master/Slave configuration.  
+* Master node coordinates all the processes which run on worker nodes. The master nodes run a driver program which is a seperate JVM processes. <br/>
+The driver program is responsible launching tasks. Also contains SparkContext, which is the heart of the any Spark application.
+* Several groups of services run inside the driver. SparkEnv, DAGScheduler, TaskScheduler, SparkUI
+* Within the driver program is where you instantiate to Spark application that you want to run. 
+* Spark application uses the SparkContext as the entry point. This will kickstart the application.
+* The application will then read data, perform as a series of transformations and actions. These operations are represented in the form of DAG of RDDs. Once the DAG created, then Spark internally creates physical execution plan for this DAG(also called Stages.
