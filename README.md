@@ -11,8 +11,7 @@
 # Spark Intro
 * Spark is built on top of Hadoop spesifically YARN and HDFS.
 * Once the task has been defined, this will be run as a job by the Cluster Manager. YARN, Apache Mesos or Standalone.
-![alt text](http://url/to/img.png)
-
+<br/> ![Screenshot](1.png)
 # RDD
 * All operations in Spark are performed in-memory objects.
 * An RDD is a collection of records.
@@ -39,8 +38,8 @@ Process occurs on nodes parallel. Data is stored in memory for each node in clus
 * DataFrame, represents data in tabular format. Using with Python. Very similar RDBMS.
 * Every row in a DataFrame represents one record or one representation.
 * Every column represent 1 variable ( a list or vector)
-* Where does DataFrame come from? ![alt text](http://url/to/img.png)
+* Where does DataFrame come from? ![DataFrame Evaluation](2.png)
 * **Starting Spark 2.0, APIs for DataSets and DataFrames have merged.**
 ### Comparisions
-![alt text](http://url/to/img.png)
-![alt text](http://url/to/img.png)
+![RDD-DataSets](3.png)
+![DataSets-DataFrame](4.png)
