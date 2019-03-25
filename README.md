@@ -75,3 +75,26 @@ Project Tungsten introduce many optimizations in Spark to make the Spark engine 
 * When the driver program creates the SparkContext, it then interacts with the cluster manager, which is responsible for splitting up executors on the worker nodes.
 * Every work compute node can have several executors. These executors are distributed agents which run tasks on your worker nodes. Task are the basic unit of execution, the actual code which contains the transformations and actions that you've specified.
 * Tasks are logically grouped into stages where stages are the physical units of execution.
+
+### Accumulators and Broadcast Variables
+* Different processing running on different nodes in your cluster can share variables. There are two ways to share variables. 
+`Accumulators` and `Broadcast` variables.
+* To understand these mechanism we should first understand how Spark processes work.
+* Scala has written in Scala and Scala heavily utilizes closures. Languages that offer closures functionality treat functions as first class citizens along with other data types. 
+
+#### First Class Function
+* A function can be stored in a variable or a value.
+* The return value of a function can be a function.
+* A parameter of a function can be a function.
+
+* The returned nested function is called closure. Nested function can access local variables from outer scope.
+* The closures has its own copies of the local variables that are present in the outer scope, and it retains these copies even after the outer scope completely ceases to exist. Because, functions are first-class citizens, these nested functions can be passed around from one variable to another, passed in as input arguments to other functions and so on. They carry along their own copy of these local variables from the outer scope as they are passed around.
+
+* **Task which run on individual workers are actualy closure functions**. Closures are what allow Spark to distribute their compute processes to the different nodes in cluster. **Every task will contain a copy of the variables that it works on.**
+**It's important to note here that a copy of these variables will be present for every task that runs on a compute node, and a single node might have several tasks.
+
+* To summarizing, 1 copy per task, all copying from master(no copying from one task to another- this is not efficient)
+
+#### Shared Variables
+* Broadcast variables: only 1 read-only copy per node(not 1 copy per task).
+* Accumulators, broadcast to workers but can be modified by adding to it.
