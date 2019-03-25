@@ -55,7 +55,7 @@ The driver program is responsible launching tasks. Also contains SparkContext, w
 * Every stages split into operations on RDD partitions called Tasks.
 
 ### Spark 1.x Architecture
-![Spark 1.x Architecture](5.png)
+![Spark 1.x Architecture](5.PNG)
 
 ### Spark 2
 * The overal architecture diagram of Spark 1 and Spark 2 are very similar, the difference in how the program is actually executed.
